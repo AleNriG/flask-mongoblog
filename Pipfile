@@ -4,7 +4,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pre-commit = "*"
 black = "*"
 flake8 = "*"
 pycodestyle = "*"
@@ -13,7 +12,6 @@ pytest = "*"
 
 [packages]
 flask = "*"
-flask-openid = "*"
 flask-wtf = "*"
 
 [requires]

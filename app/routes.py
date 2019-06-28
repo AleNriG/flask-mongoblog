@@ -4,7 +4,6 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask_login import current_user
-from flask_login import login_required
 from flask_login import login_user
 from flask_login import logout_user
 from werkzeug.urls import url_parse
@@ -18,22 +17,16 @@ from . import app
 
 
 @app.route("/")
-@app.route("/index")
-@login_required
+@app.route("/index", methods=["GET", "POST"])
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        public(form)
-    posts = Post()
+        post = Post(title=form.title.data, content=form.content.data, author_id=current_user.get_id())
+        post.save()
+        flash("You public your post!")
+        return redirect(url_for("index"))
+    posts = Post.objects.all()
     return render_template("index.html", form=form, posts=posts)
-
-
-@login_required
-def public(form):
-    post = Post(title=form.title.data, content=form.content.data)
-    post.save()
-    flash("You public your post!")
-    return redirect(url_for("index"))
 
 
 @app.route("/register", methods=["GET", "POST"])

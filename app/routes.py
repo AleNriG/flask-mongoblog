@@ -4,25 +4,36 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask_login import current_user
+from flask_login import login_required
 from flask_login import login_user
 from flask_login import logout_user
 from werkzeug.urls import url_parse
 
 from app.forms import LoginForm
+from app.forms import PostForm
 from app.forms import RegistrationForm
+from app.models import Post
 from app.models import User
 from . import app
 
 
 @app.route("/")
 @app.route("/index")
+@login_required
 def index():
-    user = {"username": "Master"}
-    posts = [
-        {"author": {"username": "Pirate"}, "body": "Are you ready, kids?!"},
-        {"author": {"username": "Kids"}, "body": "YES!!!"},
-    ]
-    return render_template("index.html", posts=posts)
+    form = PostForm()
+    if form.validate_on_submit():
+        public(form)
+    posts = Post()
+    return render_template("index.html", form=form, posts=posts)
+
+
+@login_required
+def public(form):
+    post = Post(title=form.title.data, content=form.content.data)
+    post.save()
+    flash("You public your post!")
+    return redirect(url_for("index"))
 
 
 @app.route("/register", methods=["GET", "POST"])

@@ -40,6 +40,12 @@ def posting():
     return render_template("posting.html", title="Write your post!", form=form)
 
 
+@app.route("/post/<title>")
+def post(title):
+    post = Post.objects.get(title=title)
+    return render_template("post.html", post=post)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:

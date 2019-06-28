@@ -24,7 +24,7 @@ def index():
     return render_template("index.html", posts=posts)
 
 
-@app.route("/posting")
+@app.route("/posting", methods=["GET", "POST"])
 @login_required
 def posting():
     form = PostForm()

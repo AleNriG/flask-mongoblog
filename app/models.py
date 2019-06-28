@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
 from app import db
+from app import login
 
 
 class User(db.Document):
@@ -16,6 +17,11 @@ class User(db.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+
+@login.user_loader
+def load_user(user_id):
+    return User.objects(pk=user_id).first()
 
 
 class Post(db.Document):

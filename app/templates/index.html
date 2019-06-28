@@ -7,6 +7,19 @@
 <h1>Hello, {{ current_user.username }}!</h1>
 {% endif %}
 {% for post in posts %}
-<div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+<p>
+    <b>{{ post.title }}</b><br>
+    {{ post.content }}<br>
+    by: {{ post.author_id.username }}<br>
+</p>
 {% endfor %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title }}<br>
+        {{ form.content }}<br>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
 {% endblock %}
+

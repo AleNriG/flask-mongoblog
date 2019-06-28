@@ -21,7 +21,7 @@ def index():
         {"author": {"username": "Pirate"}, "body": "Are you ready, kids?!"},
         {"author": {"username": "Kids"}, "body": "YES!!!"},
     ]
-    return render_template("index.html", user=user, posts=posts)
+    return render_template("index.html", posts=posts)
 
 
 @app.route("/login", methods=["GET", "POST"])

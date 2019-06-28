@@ -1,5 +1,8 @@
 import datetime
 
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+
 from app import db
 
 
@@ -7,6 +10,12 @@ class User(db.Document):
     email = db.StringField(max_lenght=32, required=True)
     username = db.StringField(max_lenght=64, required=True)
     password_hash = db.StringField(max_lenght=128, required=True)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class Post(db.Document):

@@ -6,6 +6,13 @@
 {% else %}
 <h1>Hello, {{ current_user.username }}!</h1>
 {% endif %}
+{% for post in posts %}
+<p>
+    <b>{{ post.title }}</b><br>
+    {{ post.content }}<br>
+    by: {{ post.author_id.username }}<br>
+</p>
+{% endfor %}
 <form action="" method="post">
     {{ form.hidden_tag() }}
     <p>
@@ -14,10 +21,5 @@
     </p>
     <p>{{ form.submit() }}</p>
 </form>
-{% for post in posts %}
-<p>
-    {{ post.author_id }} says: <b>{{ post.title }}</b>
-</p>
-{% endfor %}
 {% endblock %}
 

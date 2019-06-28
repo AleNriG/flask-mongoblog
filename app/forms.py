@@ -26,11 +26,11 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Register")
 
     def validate_username(self, username):
-        user = User.objects(username=username).first()
+        user = User.objects(username=username.data).first()
         if user is not None:
             raise ValidationError("Please use a different username")
 
     def validate_email(self, email):
-        user = User.objects(email=email).first()
+        user = User.objects(email=email.data).first()
         if user is not None:
             raise ValidationError("Please use a different email")

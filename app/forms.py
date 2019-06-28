@@ -6,6 +6,7 @@ from wtforms import SubmitField
 from wtforms.validators import DataRequired
 from wtforms.validators import Email
 from wtforms.validators import EqualTo
+from wtforms.validators import Length
 from wtforms.validators import ValidationError
 
 from app.models import User
@@ -37,5 +38,6 @@ class RegistrationForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    post = TextAreaField("Say something", validators=[DataRequired, Length(min=1, max=500)])
+    title = StringField("Title", validators=[DataRequired(), Length(min=1, max=50)])
+    content = StringField("Say something", validators=[DataRequired(), Length(min=1, max=500)])
     submit = SubmitField('Submit')

@@ -10,7 +10,8 @@
 <p>
     <b>{{ post.title }}</b><br>
     {{ post.content }}<br>
-    by: {{ post.author_id.username }}<br>
+    by: {{ post.author_id.username }} at {{ post.publication_datetime.strftime("%H:%M") }}
+    on {{ post.publication_datetime.strftime("%d/%m/%Y") }}<br>
 </p>
 {% endfor %}
 <a href="{{ url_for('posting') }}">Write your post!</a>

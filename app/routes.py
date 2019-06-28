@@ -12,6 +12,7 @@ from werkzeug.urls import url_parse
 from app.forms import LoginForm
 from app.forms import PostForm
 from app.forms import RegistrationForm
+from app.models import Comment
 from app.models import Post
 from app.models import User
 from . import app
@@ -43,7 +44,8 @@ def posting():
 @app.route("/post/<title>")
 def post(title):
     post = Post.objects.get(title=title)
-    return render_template("post.html", post=post)
+    comments = Comment.objects(post_id=post.id)
+    return render_template("post.html", post=post, comments=comments)
 
 
 @app.route("/register", methods=["GET", "POST"])

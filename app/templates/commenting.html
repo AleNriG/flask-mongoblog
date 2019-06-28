@@ -3,15 +3,4 @@
 {% block content %}
 <h1>{{ post.title }}</h1>
 {{ post.content }}<br>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.title }}<br>
-        {{ form.content(cols=32, rows=4) }}<br>
-        {% for error in form.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
 {% endblock %}

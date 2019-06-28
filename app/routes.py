@@ -9,9 +9,11 @@ from flask_login import login_user
 from flask_login import logout_user
 from werkzeug.urls import url_parse
 
+from app.forms import CommentForm
 from app.forms import LoginForm
 from app.forms import PostForm
 from app.forms import RegistrationForm
+from app.models import Comment
 from app.models import Post
 from app.models import User
 from . import app
@@ -38,6 +40,30 @@ def posting():
         flash("You public your post!")
         return redirect(url_for("index"))
     return render_template("posting.html", title="Write your post!", form=form)
+
+
+@app.route("/commenting/<post_id>", methods=["GET", "POST"])
+@login_required
+def commenting(post_id):
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(
+            title=form.title.data,
+            content=form.content.data,
+            author_id=current_user.get_id(),
+            post_id=post_id
+        )
+        comment.save()
+        flash("You public your comment!")
+        return redirect(url_for("index"))
+    return render_template("commenting.html", title="Write your comment!", form=form)
+
+
+@app.route("/post/<title>")
+def post(title):
+    post = Post.objects.get(title=title)
+    comments = Comment.objects(post_id=post.id)
+    return render_template("post.html", post=post, comments=comments)
 
 
 @app.route("/register", methods=["GET", "POST"])

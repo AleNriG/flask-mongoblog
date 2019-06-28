@@ -3,4 +3,8 @@
 {% block content %}
 <h1>{{ post.title }}</h1>
 {{ post.content }}<br>
+by: {{ post.author_id.username }} at {{ post.publication_datetime.strftime("%H:%M") }}
+on {{ post.publication_datetime.strftime("%d/%m/%Y") }}<br>
+{{ comments.count() }} Comments
+
 {% endblock %}

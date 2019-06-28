@@ -19,4 +19,10 @@ class Post(db.Document):
 
 
 class Comment(db.Document):
-    pass
+    title = db.StringField(max_length=64, required=True)
+    content = db.StringField(required=True)
+    publication_datetime = db.DateTimeField(
+        default=datetime.datetime.now, required=True
+    )
+    post_id = db.ReferenceField(Post)
+    author_id = db.ReferenceField(User)

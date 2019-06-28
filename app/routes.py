@@ -1,10 +1,12 @@
 from flask import flash
 from flask import redirect
 from flask import render_template
+from flask import request
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
+from werkzeug.urls import url_parse
 
 from app.forms import LoginForm
 from app.models import User
@@ -33,7 +35,10 @@ def login():
             flash("Invalid username or password")
             return redirect(url_for("login"))
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for("index"))
+        next_paige = request.args.get("next")
+        if not next_paige or url_parse(next_paige).netloc != '':
+            next_paige = url_for("index")
+        return redirect(next_paige)
     return render_template("login.html", title="Sign In", form=form)
 
 

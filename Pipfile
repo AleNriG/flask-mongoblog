@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 black = "*"
+pre-commit = "*"
 flake8 = "*"
 pycodestyle = "*"
 mypy = "*"
@@ -12,7 +13,11 @@ pytest = "*"
 
 [packages]
 flask = "*"
+flask-script = "*"
+flask-login = "*"
 flask-wtf = "*"
+mongoengine = "*"
+flask-mongoengine = "*"
 
 [requires]
 python_version = "3.7"

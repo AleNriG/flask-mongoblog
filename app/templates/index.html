@@ -13,13 +13,6 @@
     by: {{ post.author_id.username }}<br>
 </p>
 {% endfor %}
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.title }}<br>
-        {{ form.content }}<br>
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+<a href="{{ url_for('posting') }}">Write your post!</a>
 {% endblock %}
 

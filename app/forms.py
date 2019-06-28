@@ -34,3 +34,8 @@ class RegistrationForm(FlaskForm):
         user = User.objects(email=email.data).first()
         if user is not None:
             raise ValidationError("Please use a different email")
+
+
+class PostForm(FlaskForm):
+    post = TextAreaField("Say something", validators=[DataRequired, Length(min=1, max=500)])
+    submit = SubmitField('Submit')

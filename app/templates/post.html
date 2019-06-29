@@ -13,5 +13,16 @@ by: {{ comment.author_id.username }} at {{ comment.publication_datetime.strftime
 on {{ comment.publication_datetime.strftime("%d/%m/%Y") }}<br>
 {% endfor %}
 <br>
-<a href="{{ url_for('commenting', post_id=post.id) }}">Write your comment!</a>
+{% if current_user.is_authenticated %}
+Write your comment!
+<form action="", method="post">
+    {{ form.hidden_tag() }}
+    {{ form.title }}<br>
+    {{ form.content }}<br>
+    {{ form.submit }}
+</form>
+{% else %}
+<a href="{{ url_for('login') }}">Login to comment!</a>
+{% endif %}
+
 {% endblock %}

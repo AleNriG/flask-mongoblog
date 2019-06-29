@@ -42,28 +42,22 @@ def posting():
     return render_template("posting.html", title="Write your post!", form=form)
 
 
-@app.route("/commenting/<post_id>", methods=["GET", "POST"])
-@login_required
-def commenting(post_id):
+@app.route("/post/<title>", methods=["GET", "POST"])
+def post(title):
+    post = Post.objects.get(title=title)
+    comments = Comment.objects(post_id=post.id)
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(
             title=form.title.data,
             content=form.content.data,
             author_id=current_user.get_id(),
-            post_id=post_id
+            post_id=post.id
         )
         comment.save()
         flash("You public your comment!")
-        return redirect(url_for("index"))
-    return render_template("commenting.html", title="Write your comment!", form=form)
-
-
-@app.route("/post/<title>")
-def post(title):
-    post = Post.objects.get(title=title)
-    comments = Comment.objects(post_id=post.id)
-    return render_template("post.html", post=post, comments=comments)
+        return render_template("post.html", post=post, comments=comments, form=form)
+    return render_template("post.html", post=post, comments=comments, form=form)
 
 
 @app.route("/register", methods=["GET", "POST"])

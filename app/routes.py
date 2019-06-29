@@ -42,9 +42,9 @@ def posting():
     return render_template("posting.html", title="Write your post!", form=form)
 
 
-@app.route("/post/<title>", methods=["GET", "POST"])
-def post(title):
-    post = Post.objects.get(title=title)
+@app.route("/post/<id>", methods=["GET", "POST"])
+def post(id):
+    post = Post.objects.get(id=id)
     comments = Comment.objects(post_id=post.id)
     form = CommentForm()
     if form.validate_on_submit():

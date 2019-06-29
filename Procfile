@@ -1,1 +1,1 @@
-web: gunicorn flask_mongoblog:app --log-file=-
+web: gunicorn app:app --log-file=-

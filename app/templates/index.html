@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if current_user.is_anonymous %}
-<h1>Hello, Stranger!</h1>
-{% else %}
-<h1>Hello, {{ current_user.username }}!</h1>
-{% endif %}
-{% for post in posts %}
-<p>
-    <b><a href="{{ url_for('post', id=post.id) }}">{{ post.title }}</a></b><br>
-    {{ post.content }}<br>
-    by: {{ post.author_id.username }} at {{ post.publication_datetime.strftime("%H:%M") }}
-    on {{ post.publication_datetime.strftime("%d/%m/%Y") }}<br>
-</p>
-{% endfor %}
-<a href="{{ url_for('posting') }}">Write your post!</a>
+    {% if current_user.is_anonymous %}
+        <h1>Hello, Stranger!</h1>
+    {% else %}
+        <h1>Hello, {{ current_user.username }}!</h1>
+    {% endif %}
+    {% for post in posts %}
+    <p>
+        <b><a href="{{ url_for('post', id=post.id) }}">{{ post.title }}</a></b><br>
+        {{ post.content }}<br>
+        by: {{ post.author_id.username }} at {{ post.publication_datetime.strftime("%H:%M") }}
+        on {{ post.publication_datetime.strftime("%d/%m/%Y") }}<br>
+    </p>
+    {% endfor %}
+    <a href="{{ url_for('posting') }}">Write your post!</a>
 {% endblock %}
 

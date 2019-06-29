@@ -52,7 +52,7 @@ def post(id):
             title=form.title.data,
             content=form.content.data,
             author_id=current_user.get_id(),
-            post_id=post.id
+            post_id=post.id,
         )
         comment.save()
         flash("You public your comment!")

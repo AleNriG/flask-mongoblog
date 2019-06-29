@@ -12,7 +12,6 @@ on {{ post.publication_datetime.strftime("%d/%m/%Y") }}<br>
 by: {{ comment.author_id.username }} at {{ comment.publication_datetime.strftime("%H:%M") }}
 on {{ comment.publication_datetime.strftime("%d/%m/%Y") }}<br>
 {% endfor %}
-
-
+<br>
 <a href="{{ url_for('commenting', post_id=post.id) }}">Write your comment!</a>
 {% endblock %}

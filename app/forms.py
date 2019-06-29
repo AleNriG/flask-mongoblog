@@ -24,7 +24,9 @@ class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = StringField("Password", validators=[DataRequired()])
-    password2 = StringField("Repeat Password", validators=[DataRequired(), EqualTo('password')])
+    password2 = StringField(
+        "Repeat Password", validators=[DataRequired(), EqualTo("password")]
+    )
     submit = SubmitField("Register")
 
     def validate_username(self, username):
@@ -40,11 +42,19 @@ class RegistrationForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(min=1, max=50)])
-    content = TextAreaField("Say something", validators=[DataRequired(), Length(min=1, max=500)])
-    submit = SubmitField('Submit')
+    content = TextAreaField(
+        "Say something", validators=[DataRequired(), Length(min=1, max=500)]
+    )
+    submit = SubmitField("Submit")
 
 
 class CommentForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(min=1, max=50)])
-    content = TextAreaField("Say something", validators=[DataRequired(), Length(min=1, max=500)])
-    submit = SubmitField('Submit')
+    content = TextAreaField(
+        "Say something", validators=[DataRequired(), Length(min=1, max=500)]
+    )
+    submit = SubmitField("Submit")
+
+
+class DeleteForm(FlaskForm):
+    delete = SubmitField("Delete")

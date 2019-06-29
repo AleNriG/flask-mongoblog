@@ -15,4 +15,5 @@ flask-login
 flask-mongoengine
 flask-script
 flask-wtf
+gunicorn
 mongoengine

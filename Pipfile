@@ -10,6 +10,7 @@ flask-login = "*"
 flask-wtf = "*"
 mongoengine = "*"
 flask-mongoengine = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"

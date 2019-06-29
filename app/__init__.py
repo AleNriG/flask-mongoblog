@@ -14,5 +14,16 @@ login.login_view = "login"
 from . import routes
 
 
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    db = MongoEngine(app)
+    login = LoginManager(app)
+    login.login_view = "login"
+
+    return app
+
+
 if __name__ == "__main__":
     app.run()

@@ -15,6 +15,7 @@
     {% endfor %}
 <br>
     {% if current_user.is_authenticated %}
+<br>
     Write your comment!
     <form action="", method="post">
         {{ form.hidden_tag() }}

@@ -4,13 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-flask = "*"
-flask-script = "*"
-flask-login = "*"
-flask-wtf = "*"
-mongoengine = "*"
 flask-mongoengine = "*"
 gunicorn = "*"
+mongoengine = "*"
+Flask = "*"
+Flask-Login = "*"
+Flask-Script = "*"
+Flask-WTF = "*"
 
 [requires]
 python_version = "3.7"

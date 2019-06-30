@@ -54,7 +54,3 @@ class CommentForm(FlaskForm):
         "Say something", validators=[DataRequired(), Length(min=1, max=500)]
     )
     submit = SubmitField("Submit")
-
-
-class DeleteForm(FlaskForm):
-    delete = SubmitField("Delete")
